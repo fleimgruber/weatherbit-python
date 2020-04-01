@@ -15,4 +15,4 @@ class UnicodeMixin(object):
 
 
 class PropertyUnavailable(AttributeError):
-	pass
+    pass
