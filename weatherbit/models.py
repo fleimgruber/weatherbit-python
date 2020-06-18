@@ -2,6 +2,8 @@ from weatherbit.utils import UnicodeMixin
 import datetime
 import requests
 
+TIMEOUT = 60
+
 
 class TimeSeries(UnicodeMixin):
     def __init__(self, data, response, headers):
@@ -15,7 +17,7 @@ class TimeSeries(UnicodeMixin):
         """
         Call update() to refresh the object state, and any stale data from the API.
         """
-        r = requests.get(self.response.url)
+        r = requests.get(self.response.url, timeout=TIMEOUT)
         self.json = r.json()
         self.response = r
         self.points = []
@@ -73,7 +75,7 @@ class SingleTime(UnicodeMixin):
         """
         Call update() to refresh the object state, and any stale data from the API.
         """
-        r = requests.get(self.response.url)
+        r = requests.get(self.response.url, timeout=TIMEOUT)
         self.json = r.json()
         self.response = r
         self.points = []

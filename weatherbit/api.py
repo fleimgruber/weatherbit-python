@@ -2,6 +2,8 @@ import requests
 import datetime
 from weatherbit.models import Forecast, History, Current
 
+TIMEOUT = 60
+
 
 class Api(object):
     def __init__(self, key, granularity=None, history_granularity=None, https=True):
@@ -199,7 +201,7 @@ class Api(object):
 
     @staticmethod
     def _parse_forecast(request_url):
-        weatherbitio_reponse = requests.get(request_url)
+        weatherbitio_reponse = requests.get(request_url, timeout=TIMEOUT)
         weatherbitio_reponse.raise_for_status()
         json = weatherbitio_reponse.json()
         headers = weatherbitio_reponse.headers
@@ -208,7 +210,7 @@ class Api(object):
 
     @staticmethod
     def _parse_history(request_url):
-        weatherbitio_reponse = requests.get(request_url)
+        weatherbitio_reponse = requests.get(request_url, timeout=TIMEOUT)
         weatherbitio_reponse.raise_for_status()
         json = weatherbitio_reponse.json()
         headers = weatherbitio_reponse.headers
@@ -217,7 +219,7 @@ class Api(object):
 
     @staticmethod
     def _parse_current(request_url):
-        weatherbitio_reponse = requests.get(request_url)
+        weatherbitio_reponse = requests.get(request_url, timeout=TIMEOUT)
         weatherbitio_reponse.raise_for_status()
         json = weatherbitio_reponse.json()
         headers = weatherbitio_reponse.headers
